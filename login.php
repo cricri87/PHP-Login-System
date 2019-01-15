@@ -1,8 +1,12 @@
 <?php
 // Allowe the config require the config
-define('__DEFINED__', true);
+// define('__DEFINED__', true);
+//   require_once "inc/config.php";
+//   require_once "inc/defined.php";
+// Allow the config
+  define('__CONFIG__', true);
+  // Require the config
   require_once "inc/config.php";
-  require_once "inc/defined.php";
    ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,6 +45,8 @@ define('__DEFINED__', true);
                   <input class="uk-input" id="form-stacked-text" type="password" required='required' placeholder="Your Password">
               </div>
           </div>
+
+          <div class="uk-margin uk-alert uk-alert-danger js-error" style="display: none;"></div>
 
           <div class="uk-margin">
               <button class="uk-button uk-button-default" type="submit">Login</button>

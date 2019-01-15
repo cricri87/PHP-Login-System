@@ -1,8 +1,14 @@
 <?php
 // Allowe the config require the config
-define('__DEFINED__', true);
+// define('__DEFINED__', true);
+//   require_once "inc/config.php";
+  // require_once "inc/defined.php";
+
+// Allow the config
+  define('__CONFIG__', true);
+  // Require the config
   require_once "inc/config.php";
-  require_once "inc/defined.php";
+
    ?>
 <!DOCTYPE html>
 <html lang="en">
