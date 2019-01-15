@@ -83,7 +83,7 @@ $(document).on("submit", "form.js-login", function(event) {
       if(data.redirect !== undefined) {
         window.location = data.redirect;
       }else if(data.error !== undefined) {
-        error.text(data.error).show()
+        error.html(data.error).show()
       }
 
 

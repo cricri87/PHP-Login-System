@@ -7,6 +7,12 @@
   if(!defined('__CONFIG__')) {
     exit('You do not have a config file');
   }
+
+  // Session is always turned on
+  if(!isset($_SESSION)) {
+    session_start();
+
+  }
   // our config is below
 
   error_reporting(-1);
