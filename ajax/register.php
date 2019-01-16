@@ -16,14 +16,10 @@
    $return = [];
 
    $email = Filter::String($_POST['email']);
-   // $email = strtolower($email); using mysql to do it LOWER
 
-   // make sure the user do not exist
-   $findUser = $con->prepare("SELECT user_id FROM users WHERE email = LOWER(:email) LIMIT 1");
-   $findUser->bindParam(':email', $email, PDO::PARAM_STR);
-   $findUser->execute();
+   $userFound = findUser($con, $email);
 
-   if($findUser->rowCount() == 1) {
+   if($userFound) {
     // user exist
     // we can check if they are able to log in
     $return['error'] = "You already have an account";
@@ -50,8 +46,6 @@
    // make sure the user can be added and is added
 
    // return the proper information back to javascript to redirect us
-
-   $return['name'] = 'Christian Rognstad';
 
   echo json_encode($return, JSON_PRETTY_PRINT);exit;
 

@@ -20,19 +20,13 @@
    // $email = strtolower($email); using mysql to do it LOWER
 
    // make sure the user do not exist
-   $findUser = $con->prepare("SELECT user_id, password FROM users WHERE email = LOWER(:email) LIMIT 1");
-   $findUser->bindParam(':email', $email, PDO::PARAM_STR);
-   $findUser->execute();
+   $userFound = findUser($con, $email, true);
 
-   if($findUser->rowCount() == 1) {
-    // user exist
-    // try to log them in
-    // we can check if they are able to log in
-    $user = $findUser->fetch(PDO::FETCH_ASSOC);
-    $user_id['user_id'] = (int) $user['user_id'];
-    $return['error'] = "You already have an account";
+   if($userFound) {
 
-    $hash = $user['password'];
+    $user_id['user_id'] = (int) $userFound['user_id'];
+    $hash = $userFound['password'];
+
     if(password_verify($password, $hash)) {
       // user is signed in
       $return['redirect'] = 'PHP-Login-System/dashboard.php';
@@ -50,8 +44,6 @@
    // make sure the user can be added and is added
 
    // return the proper information back to javascript to redirect us
-
-   $return['name'] = 'Christian Rognstad';
 
   echo json_encode($return, JSON_PRETTY_PRINT);exit;
 

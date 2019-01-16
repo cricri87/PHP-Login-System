@@ -9,9 +9,24 @@
   // Require the config
   require_once "inc/config.php";
 
-
-
   forceLogin();
+
+  $user_id = $_SESSION['user_id'];
+  $getUserInfo = $con->prepare("SELECT email, reg_time FROM users WHERE user_id = :user_id LIMIT 1");
+  $getUserInfo->bindParam(":user_id", $user_id, PDO::PARAM_INT);
+  $getUserInfo->execute();
+
+  if($getUserInfo->rowCount() == 1) {
+    // user was found
+    $user = $getUserInfo->fetch(PDO::FETCH_ASSOC);
+
+  }else {
+    // user is not signed in
+    header("Location: PHP-login-system/logout.php");exit;
+  }
+
+  $date = $user['reg_time'];
+  $date = date("d-m-Y", strtotime($date));
 
   // print_r($_SESSION['user_id']) . " is your user id";
   // foreach ($_SESSION['user_id'] as $key) {
@@ -37,12 +52,12 @@
   <body>
 
     <div class="uk-section uk-container">
-      <h1>Hello Dashboard you are user: <?php foreach($_SESSION['user_id'] as $user_id){
-        echo $user_id;
-      } ?>
+      <h1>Dashboard</h1>
+      <p>Hello <?php echo $user['email'];?>, You registered at <?php echo $date;  ?></p>
+    <a href="PHP-login-system/logout.php">Logout</a>
 
-      </h1>
     </div>
+
 
     <?php require_once "inc/footer.php"; ?>
 
