@@ -9,6 +9,10 @@
   // Require the config
   require_once "inc/config.php";
 
+
+
+  forceLogin();
+
   // print_r($_SESSION['user_id']) . " is your user id";
   // foreach ($_SESSION['user_id'] as $key) {
   //   echo $key . " is your user id";
@@ -33,7 +37,11 @@
   <body>
 
     <div class="uk-section uk-container">
-      <h1>Hello Dashboard</h1>
+      <h1>Hello Dashboard you are user: <?php foreach($_SESSION['user_id'] as $user_id){
+        echo $user_id;
+      } ?>
+
+      </h1>
     </div>
 
     <?php require_once "inc/footer.php"; ?>
