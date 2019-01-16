@@ -2,7 +2,7 @@
 // force the user to be logged in or else redirect to login
   function forceLogin() {
 
-    if($_SESSION['user_id']) {
+    if(isset($_SESSION['user_id'])) {
       // the user is aloud here
     }else {
       // the user has to be logged in
@@ -12,7 +12,7 @@
 
   function forceDashboard() {
 
-    if($_SESSION['user_id']) {
+    if(isset($_SESSION['user_id'])) {
       // the user is aloud here
       header('Location: dashboard.php');exit;
     }else {
